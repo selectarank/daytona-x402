@@ -20,7 +20,7 @@ POST /sandbox   -> 402 until paid, then creates a sandbox: { sandboxId, state, t
 GET  /health
 ```
 
-Body (all optional): `snapshot`, `target`, `name`, `env`, `autoStopInterval`, `ttlMinutes`. `ttlMinutes` is capped at the operator's `defaultTtlMinutes` (default 60) so a paid call cannot create an unbounded sandbox.
+Body (all optional): `snapshot`, `target`, `name`, `env`, `autoStopInterval`, `ttlMinutes`. `ttlMinutes` is clamped server-side to the operator's `defaultTtlMinutes` (default 60) and forwarded in the request body. Whether Daytona's API honors that field is **not verified**; use `autoStopInterval` / your Daytona org limits as the real cost guard until it is checked.
 
 ## Quickstart (no key, no wallet, no cost)
 
